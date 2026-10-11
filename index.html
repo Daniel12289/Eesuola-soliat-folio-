@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <title></title>
+</head>
+
+<body>
+   
+</body>
+
+</html<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soliat | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0"></script>
+    <script src="https://kit.fontawesome.com/yourfontawesomekit.js" crossorigin="anonymous"></script>
+    <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-light: #f5f5f5;
+            --text-dark: #e0e0e0;
+            --text-light: #1a1a1a;
+            --primary: #00f0ff;
+            --secondary: #9d00ff;
+            --glass-bg: rgba(255,255,255,0.1);
+            --glass-border: rgba(255,255,255,0.2);
+        }
+        body {
+            margin:0;
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            transition: background 0.3s, color 0.3s;
+        }
+        body.light-mode {
+            background: var(--bg-light);
+            color: var(--text-light);
+        }
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            top:0;
+            left:0;
+        }
+        header {
+            position: fixed;
+            width: 100%;
+            top:0;
+            left:0;
+            display:flex;
+            justify-content: space-between;
+            align-items:center;
+            padding: 1rem 2rem;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+        .logo {
+            font-size:1.5rem;
+            font-weight:600;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        nav ul {
+            list-style:none;
+            display:flex;
+            gap:1.5rem;
+            margin:0;
+            padding:0;
+        }
+        nav a {
+            color:inherit;
+            text-decoration:none;
+            font-weight:500;
+            position:relative;
+        }
+        nav a::after {
+            content:"";
+            position:absolute;
+            width:0;
+            height:2px;
+            left:0;
+            bottom:-4px;
+            background:linear-gradient(45deg, var(--primary), var(--secondary));
+            transition:width .3s;
+        }
+        nav a:hover::after {
+            width:100%;
+        }
+        .menu-toggle {
+            display:none;
+            font-size:1.5rem;
+            cursor:pointer;
+        }
+        .dark-light-toggle {
+            cursor:pointer;
+            font-size:1.2rem;
+            background:linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+        }
+        main {
+            padding-top:80px;
+        }
+        section {
+            padding:4rem 2rem;
+            min-height:100vh;
+        }
+        .glass-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius:12px;
+            backdrop-filter: blur(10px);
+            padding:2rem;
+            margin:1rem 0;
+            box-shadow:0 4px 30px rgba(0,0,0,0.5);
+            transition:transform .3s, box-shadow .3s;
+        }
+        .glass-card:hover {
+            transform:translateY(-5px);
+            box-shadow:0 8px 30px rgba(0,0,0,0.7);
+        }
+        h1, h2 {
+            margin:0 0 1rem 0;
+            font-weight:600;
+        }
+        .btn {
+            display:inline-block;
+            padding:0.75rem 1.5rem;
+            margin-top:1rem;
+            border:none;
+            border-radius:30px;
+            background:linear-gradient(45deg, var(--primary), var(--secondary));
+            color:#fff;
+            font-weight:600;
+            cursor:pointer;
+            text-decoration:none;
+            transition:transform .2s, box-shadow .2s;
+        }
+        .btn:hover {
+            transform:scale(1.05);
+            box-shadow:0 0 15px var(--primary);
+        }
+        .typing {
+            font-size:2rem;
+            font-weight:500;
+            min-height:2.5rem;
+        }
+        .skills-list, .cert-list, .social-links {
+            display:flex;
+            flex-wrap:wrap;
+            gap:1rem;
+        }
+        .skill, .cert, .social {
+            background:linear-gradient(45deg, var(--primary), var(--secondary));
+            padding:0.5rem 1rem;
+            border-radius:20px;
+            color:#fff;
+            font-size:0.9rem;
+        }
+        .contact-form {
+            display:flex;
+            flex-direction:column;
+            gap:1rem;
+            max-width:500px;
+        }
+        .contact-form input, .contact-form textarea {
+            padding:0.75rem;
+            border:none;
+            border-radius:8px;
+            background:rgba(255,255,255,0.1);
+            color:inherit;
+            resize:none;
+        }
+        .contact-form button {
+            align-self:flex-start;
+        }
+        .chart-container {
+            width:100%;
+            max-width:600px;
+            margin:auto;
+        }
+        @media (max-width:768px) {
+            nav ul {
+                flex-direction:column;
+                background:rgba(0,0,0,0.8);
+                position:fixed;
+                top:60px;
+                right:-200px;
+                width:200px;
+                height:calc(100% - 60px);
+                padding:2rem;
+                transition:right .3s;
+            }
+            nav ul.show {
+                right:0;
+            }
+            .menu-toggle {
+                display:block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    <header>
+        <div class="logo">Soliat</div>
+        <i class="fas fa-bars menu-toggle" id="menuToggle"></i>
+        <nav>
+            <ul id="navList">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><i class="fas fa-adjust dark-light-toggle" id="modeToggle" title="Toggle Dark/Light Mode"></i></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="home">
+            <div class="glass-card">
+                <h1>Soliat | <span class="typing" id="typed"></span></h1>
+                <p>Excel-certified aspiring Data Analyst and Nursing Student.</p>
+                <a href="#contact" class="btn">Get In Touch</a>
+            </div>
+        </section>
+        <section id="about">
+            <div class="glass-card">
+                <h2>About Me</h2>
+                <p>Balancing a rigorous nursing program with a passion for data analytics, I strive to turn complex datasets into actionable insights that improve patient care and business outcomes.</p>
+            </div>
+        </section>
+        <section id="skills">
+            <div class="glass-card">
+                <h2>Skills</h2>
+                <div class="skills-list">
+                    <div class="skill">Microsoft Excel</div>
+                    <div class="skill">Data Cleaning</div>
+                    <div class="skill">PivotTables</div>
+                    <div class="skill">Dashboards</div>
+                    <div class="skill">Data Visualization</div>
+                </div>
+            </div>
+        </section>
+        <section id="projects">
+            <div class="glass-card">
+                <h2>Projects</h2>
+                <h3>Sales Dashboard</h3>
+                <p>Interactive dashboard visualizing sales performance across regions.</p>
+                <div class="chart-container">
+                    <canvas id="salesChart"></canvas>
+                </div>
+                <h3>Customer Dataset Analysis</h3>
+                <p>Exploratory analysis of a 1,000+ record customer dataset.</p>
+                <div class="chart-container">
+                    <canvas id="customerChart"></canvas>
+                </div>
+            </div>
+        </section>
+        <section id="certifications">
+            <div class="glass-card">
+                <h2>Certifications</h2>
+                <div class="cert-list">
+                    <div class="cert">Microsoft Excel Certification</div>
+                    <div class="cert">EDAH Data Analytics Training</div>
+                </div>
+            </div>
+        </section>
+        <section id="contact">
+            <div class="glass-card">
+                <h2>Contact</h2>
+                <form class="contact-form" id="contactForm">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                    <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+                <div class="social-links" style="margin-top:1rem;">
+                    <a href="#" class="social"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    <a href="#" class="social"><i class="fab fa-github"></i> GitHub</a>
+                    <a href="#" class="social"><i class="fab fa-twitter"></i> Twitter</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script>
+        // Particles.js config
+        particlesJS('particles-js', {
+            "particles": {
+                "number": {"value": 80},
+                "color": {"value": ["#00f0ff", "#9d00ff"]},
+                "shape": {"type": "circle"},
+                "opacity": {"value": 0.6},
+                "size": {"value": 3},
+                "move": {"enable": true, "speed": 2}
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {"onhover": {"enable": true, "mode": "repulse"}}
+            },
+            "retina_detect": true
+        });
+
+        // Typed.js for heading
+        new Typed('#typed', {
+            strings: ["Turning Data Into Meaningful Insights."],
+            typeSpeed: 50,
+            backSpeed: 30,
+            loop: true
+        });
+
+        // Chart.js charts
+        const salesCtx = document.getElementById('salesChart').getContext('2d');
+        const salesChart = new Chart(salesCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Q1','Q2','Q3','Q4'],
+                datasets: [{
+                    label: 'Revenue ($K)',
+                    data: [45, 60, 55, 70],
+                    backgroundColor: ['#00f0ff','#9d00ff','#00f0ff','#9d00ff']
+                }]
+            },
+            options: {
+                responsive:true,
+                plugins: {
+                    legend: {display:false}
+                }
+            }
+        });
+
+        const custCtx = document.getElementById('customerChart').getContext('2d');
+        const customerChart = new Chart(custCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Active','Inactive','Prospects'],
+                datasets: [{
+                    data: [600, 250, 150],
+                    backgroundColor: ['#00f0ff','#9d00ff','#ff00c8']
+                }]
+            },
+            options: {
+                responsive:true,
+                plugins: {
+                    legend: {position:'bottom'}
+                }
+            }
+        });
+
+        // Dark/Light mode toggle
+        const modeToggle = document.getElementById('modeToggle');
+        modeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+        });
+
+        // Mobile navigation toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navList = document.getElementById('navList');
+        menuToggle.addEventListener('click', () => {
+            navList.classList.toggle('show');
+        });
+        // Close menu on link click (mobile)
+        document.querySelectorAll('#navList a').forEach(link => {
+            link.addEventListener('click', () => {
+                navList.classList.remove('show');
+            });
+        });
+
+        // Contact form placeholder submission
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', e => {
+            e.preventDefault();
+            alert('Thank you! Your message has been received.');
+            contactForm.reset();
+        });
+    </script>
+</body>
+</html>
